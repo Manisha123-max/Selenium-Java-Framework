@@ -1,5 +1,7 @@
 package com.actions;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,5 +32,16 @@ public class Actions {
 		Select dd = new Select(dropdown);
 		dd.selectByValue(value);
 	}
-
-}
+	/*{
+	List<WebElement> options = driver.findElements(By.xpath(""));
+	for(WebElement option : options) {
+	if (option.getText().contains(null));
+	{
+	 option.click();
+	 break;
+	}*/
+	
+	
+	}
+	
+	

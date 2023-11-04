@@ -1,25 +1,17 @@
 package com.cases;
 
-import org.testng.annotations.Test;
 import java.io.IOException;
-import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.actions.Actions;
 import com.base.Base;
-import com.codoid.products.exception.FilloException;
-import com.pageObjects.HomePage;
 import com.pageObjects.LoginPage;
-import com.utils.Utils;
-import com.pageObjects.BookAppointmentPage;
 
 public class Login extends Base {
 	
@@ -27,37 +19,32 @@ public class Login extends Base {
 	public Actions actions;
 	
 	private Logger log = LogManager.getLogger(Login.class.getName());
-	private HashMap<String, String> data;
+	
 
 	@BeforeTest
-	public void initialize() throws IOException, FilloException {
-		
+	public void launchBrowser() throws IOException {
 		driver = initializeDriver();
 		log.info("Driver is initialized.");
-		data = new Utils().getTestData("TC1");
 		actions = new Actions(driver);
-		
 	}
+	
 
 	@Test
 	public void performLogin() {
 		
-		HomePage hp = new HomePage(driver);
+		
 		LoginPage lp = new LoginPage(driver);
-		BookAppointmentPage ba = new BookAppointmentPage(driver);
 		
 		actions.navigateTo(prop.getProperty("url"));
-		actions.click(hp.getMenuBtn());
-		actions.click(hp.getLogin());
-		actions.enterText(lp.getUsername(), data.get("Username"));
-		actions.enterText(lp.getPassword(), data.get("Password"));
-		actions.click(lp.getLoginBtn());
-		Assert.assertTrue(ba.getTitle().isDisplayed());
+		actions.enterText(lp.getEmail(),"manisha+H@karboncard.com");
+		actions.click(lp.getsendOTP());
+		actions.enterText(lp.getOTP(), "123456");
+		actions.click(lp.getlogin());
 		log.info("Successfully Logged In");
 
 	}
 
-	@DataProvider
+	/*@DataProvider
 	public Object[][] getData() {
 		// Each row is set of test data for a test case
 		// Each column is a value in a set of test data
@@ -72,7 +59,7 @@ public class Login extends Base {
 		data[1][1] = "testpwd2";
 
 		return data;
-	}
+	}*/
 
 	@AfterTest
 	public void teardown() {

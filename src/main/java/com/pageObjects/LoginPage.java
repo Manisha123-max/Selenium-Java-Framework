@@ -13,20 +13,24 @@ public class LoginPage {
 	}
 	
 	// All objects should be defined here
-	private By username = By.cssSelector("input[name='username']");
-	private By password = By.cssSelector("input[name='password']");
-	private By loginBtn = By.cssSelector("button[id='btn-login']");
+	private By email = By.id("email");
+	private By sendOTP = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div/form/div/div[2]/button");
+	private By OTP = By.id("otp");
+	private By login = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div[2]/div/form/div/div[4]/button");
+	
 	
 	// All methods should be defined here
-	public WebElement getUsername() {
-		return driver.findElement(username);
+	public WebElement getEmail() {
+		return driver.findElement(email);
 	}
-	public WebElement getPassword() {
-		return driver.findElement(password);
+	public WebElement getsendOTP() {
+		return driver.findElement(sendOTP);
 	}
-	public WebElement getLoginBtn() {
-		return driver.findElement(loginBtn);
+	public WebElement getOTP() {
+		return driver.findElement(OTP);
 	}
-
+	public WebElement getlogin() {
+		return driver.findElement(login);
+	}
 
 }

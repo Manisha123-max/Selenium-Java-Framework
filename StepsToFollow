@@ -18,5 +18,9 @@ Add TestNG listener information to testng.xml file
 Add extent reports to TestNG listener
 Making f/w and extent reports thread safe uisng ThreadLocal<ExtentTest> class
 
+Our Steps:
+=========
+Provide access of src/main/resources folder with command chmod +x chromedriver to enable chrome driver execution
+
 
 

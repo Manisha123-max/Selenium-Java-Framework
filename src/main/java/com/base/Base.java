@@ -1,7 +1,6 @@
 package com.base;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +19,8 @@ public class Base {
 
 		prop = loadConfig();
 		String browserName = prop.getProperty("browser");
+		
+		System.out.println(System.getProperty("user.dir"));
 
 		if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver",
