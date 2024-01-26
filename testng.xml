@@ -9,6 +9,12 @@
 			<class name="com.cases.Login" />
 		</classes>
 	</test>
+	<test name="KYCPage">
+        <classes>
+            <class name="com.cases.Login"/>
+            <class name="com.cases.KYCPage"/>
+        </classes>
+    </test>
 	<test name="ValidateFooter">
 		<classes>
 			<class name="com.cases.ValidateFooter" />

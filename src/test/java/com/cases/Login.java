@@ -5,19 +5,21 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.actions.Actions;
 import com.base.Base;
 import com.pageObjects.LoginPage;
+import com.actions.*;
+
 
 public class Login extends Base {
 	
 	public WebDriver driver;
 	public Actions actions;
-	
+	public ErrorCheck errorcheck ;
+	public NotificationHandler notification;
+	public LoginPage lp;
 	private Logger log = LogManager.getLogger(Login.class.getName());
 	
 
@@ -26,24 +28,27 @@ public class Login extends Base {
 		driver = initializeDriver();
 		log.info("Driver is initialized.");
 		actions = new Actions(driver);
+		errorcheck= new ErrorCheck(driver);
+		notification=new NotificationHandler(driver);
+		lp = new LoginPage(driver);
+		actions.navigateTo(prop.getProperty("url"));
 	}
 	
 
 	@Test
 	public void performLogin() {
 		
-		
-		LoginPage lp = new LoginPage(driver);
-		
-		actions.navigateTo(prop.getProperty("url"));
-		actions.enterText(lp.getEmail(),"manisha+H@karboncard.com");
+		actions.enterText(lp.getEmail(),"manisha@karboncard.com");
 		actions.click(lp.getsendOTP());
-		actions.enterText(lp.getOTP(), "123456");
+		errorcheck.checkError("Email id is not registered for Karbon Forex. Please drop a note on forex@karboncard.com");
+		actions.enterText(lp.getOTP(), "000111");
+		errorcheck.checkError("Please enter valid OTP!");
 		actions.click(lp.getlogin());
+		errorcheck.checkError("Incorrect OTP!");
 		log.info("Successfully Logged In");
-
+		//notification.handleNotification();
 	}
-
+ 
 	/*@DataProvider
 	public Object[][] getData() {
 		// Each row is set of test data for a test case
@@ -61,9 +66,15 @@ public class Login extends Base {
 		return data;
 	}*/
 
-	@AfterTest
+	/*@AfterTest
 	public void teardown() {
 		driver.close();
 		log.info("Driver is closed");
-	}
+	}*/
+	
+	/*@AfterTest
+	public void logout() {
+		driver.close();
+		log.info("Driver is closed");
+	}*/
 }
