@@ -20,7 +20,7 @@ public WebDriver driver;
 	
     public void gstCheckBox(String check){
     check = check.replaceAll("\\s", "").toLowerCase();
-    WebElement checkbox = driver.findElement(By.xpath("//*[@id='root']/div[1]/div/div/main/div[2]/div/div[1]/div[4]/div/form/div[3]/div[2]/div[2]/div/div/div/div/label/span[1]/input"));
+    WebElement checkbox = driver.findElement(By.xpath("//*[@id=\"gstNumber\"]"));
     if (check.equals("yes")){
         if (checkbox.isSelected()) {   } 
         else {checkbox.click();}

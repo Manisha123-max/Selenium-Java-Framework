@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
+import java.util.Random;
 
 import com.base.Base;
 import com.pageObjects.CompanyProductPage;
@@ -36,19 +36,19 @@ public class CompanyDocuments1 extends Base {
 
 	@BeforeTest
     public void companysetup() throws IOException {
-        kycPage = new KYCPage();
-        kycPage.beforeLogin();
-//       loginInstance = new Login1();
-//        loginInstance.launchBrowser(); 
+//        kycPage = new KYCPage();
+//        kycPage.beforeLogin();
+       loginInstance = new Login1();
+        loginInstance.launchBrowser(); 
     }
 
     @Test
     public void companydecoumet() {
-        kycPage.KYCForm();
-    	WebDriver driver = kycPage.getDriver();
+//        kycPage.KYCForm();
+//    	WebDriver driver = kycPage.getDriver();
     	
-//    	loginInstance.performLogin();
-//    	WebDriver driver = loginInstance.getDriver();
+    	loginInstance.performLogin();
+    	WebDriver driver = loginInstance.getDriver();
 //    	
     	
         System.out.println("Inside CompanyDocuments1 companydecoumet test");
@@ -72,8 +72,8 @@ public class CompanyDocuments1 extends Base {
     }
     
     public WebDriver getDriver() {
-		WebDriver driver = kycPage.getDriver();
-//		WebDriver driver = loginInstance.getDriver();
+//		WebDriver driver = kycPage.getDriver();
+		WebDriver driver = loginInstance.getDriver();
 		
 		return driver;
 		}

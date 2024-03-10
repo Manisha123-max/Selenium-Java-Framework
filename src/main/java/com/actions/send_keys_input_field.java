@@ -21,11 +21,20 @@ public class send_keys_input_field {
 
     }
 
- 
+    public void BrandName(String BrandName) {
+        sendKeysById("brand", BrandName);
+    }
     public void InvoiceNickname(String name) {
         sendKeysById("newNickName", name);
     }
 
+    public void freeLancername(String name) {
+        sendKeysById("legalName", name);
+    }
+
+    public void doingBusinessAs(String name) {
+        sendKeysById("brand", name);
+    }
 
     public void InvoiceEmail(String email) {
         sendKeysById("email", email);
@@ -92,9 +101,12 @@ public class send_keys_input_field {
         sendKeysById("panNumber", panNumber);
     }
     public void panNumberExisting(String panNumber) {
-        sendKey("panNumber", panNumber);
+        sendKey("panNumber", panNumber); 
     }
     
+    public void panIdNumber(String panNumber) {
+        sendKeysById("idNumber", panNumber);
+    }
 
     public void website(String website) {
         sendKeysById("website", website);
@@ -209,13 +221,15 @@ public class send_keys_input_field {
     private void sendKeysById(String id, String value, CharSequence... keysToSend) {
         try {
             WebElement inputField = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(id)));
-            ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", inputField);
-           if (inputField.getAttribute("value").isEmpty()) {
+            if (inputField.getAttribute("value").isEmpty()) {
                 inputField.sendKeys(value);
                 inputField.sendKeys(keysToSend);
-           }
+            } else {
+                inputField.sendKeys(Keys.COMMAND + "a", Keys.DELETE);
+                inputField.sendKeys(value);
+                inputField.sendKeys(keysToSend);
+            }
         } catch (Exception e) {
-            
         }
     }
 

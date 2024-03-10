@@ -44,7 +44,7 @@ public class AddInvoice extends Base  {
 			
 	        loginInstance = new Login1();
 	        loginInstance.launchBrowser(); 
-			
+//			
 			
 	    }
 		
@@ -53,10 +53,10 @@ public class AddInvoice extends Base  {
 			Scanner sc =new Scanner(System.in);
 			Random random = new Random();
 			
-//            			WebDriver driver = owerdetail.getDriver();
-//            			owerdetail.UBODetail();
+            		//	WebDriver driver = owerdetail.getDriver();
+            	//		owerdetail.UBODetail();
 
-			WebDriver driver = loginInstance.getDriver();
+		WebDriver driver = loginInstance.getDriver();
 			loginInstance.performLogin();
 
 			errorcheck = new ErrorCheck(driver);
@@ -87,7 +87,7 @@ public class AddInvoice extends Base  {
 ////	         	
 //	         ////////////////////// INVOICE DETAILS ///////////////
 //	         
-	         dropdown.InvoiceCurrency(0);
+	         dropdown.InvoiceCurrency(2);
 	         sendKeys.InvoiceAmount(250);
 	         sendKeys.InvoiceReceivableAmount(50);
 	         dropdown.InvoicePurposeCode("p0103");

@@ -1,17 +1,17 @@
 package com.actions;
 
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class CustomButtons {
     private WebDriver driver;
@@ -25,9 +25,20 @@ public class CustomButtons {
     public void button(String buttonText) {
         try {
             WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath(String.format("//button[@class=\"ant-btn ant-btn-primary\"]/span[text()=\"%s\"]", buttonText))));
-                    
+            		By.xpath(String.format("//button[@class=\"ant-btn ant-btn-primary\"]/span[text()=\"%s\"]", buttonText))));
+            		
+        	
                                         
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", nextButton);
+            nextButton.click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void freeLancerSubmit() {
+        try {
+            WebElement nextButton = driver.findElement(By.id("ckyc-submit"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", nextButton);
             nextButton.click();
         } catch (Exception e) {
@@ -148,7 +159,9 @@ public void ReceivePaymentInward() {
 
     public void InvoiceSubmit() {
         try {
+        	TimeUnit.SECONDS.sleep(2);
             WebElement addInvoiceButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div[1]/div/div/main/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]/form/div[2]/button")));
+        	
             addInvoiceButton.click();
             TimeUnit.SECONDS.sleep(2);
             
@@ -156,8 +169,10 @@ public void ReceivePaymentInward() {
     }
 
     public void InvoiceClaimSubmit() {
-        try {
-           WebElement addInvoiceButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div/button")));
+        try {																						 
+           
+        	WebElement addInvoiceButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div/button")));
+        	
         	// WebElement addInvoiceButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("ant-btn")));
              
         	//addInvoiceButton.click();
@@ -210,7 +225,9 @@ public void InvoiceView(int ButtonNumber) {
             Actions actions = new Actions(driver);
             actions.sendKeys(body, Keys.END).perform();
             TimeUnit.SECONDS.sleep(1);
-        List<WebElement> svgElements = driver.findElements(By.className("anticon-eye"));
+       // List<WebElement> svgElements = driver.findElements(By.className("anticon-eye"));
+            List<WebElement> svgElements = driver.findElements(By.xpath("//*[@id=\"Table2XLSX\"]/tbody/tr[1]/td[10]/div/div[1]/span/svg/"));
+                                                                         
 
             // Check if the specified index is valid
             if (ButtonNumber > 0 && ButtonNumber <= svgElements.size()) {
@@ -229,7 +246,7 @@ public void InvoiceViewCloseButton() {
 
         WebElement buttonElement = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/div/div/main/div[2]/div[1]/div[2]/div[3]/div[2]/div[2]/div[5]/button"));
 
-     
+                           
         buttonElement.click();
 
             TimeUnit.SECONDS.sleep(2);
